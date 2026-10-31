@@ -39,9 +39,9 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold text-white">Services</h3>
             <ul className="mt-5 flex flex-col gap-3">
-              {FOOTER_SERVICES.map(({ label, href, serviceIndex }) => (
+              {FOOTER_SERVICES.map(({ label, href }) => (
                 <li key={label}>
-                  <Link href={serviceIndex !== undefined ? `/?service=${serviceIndex}` : href} className={linkClass}>
+                  <Link href={href} className={linkClass}>
                     {label}
                   </Link>
                 </li>

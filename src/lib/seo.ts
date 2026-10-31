@@ -19,7 +19,7 @@ const WEBSITE_ID = `${BASE_URL}/#website`;
 export const SERVICE_AREAS = ["Glasgow", "Edinburgh", "Stirling", "Falkirk", "Paisley", "Livingston", "Hamilton", "East Kilbride"];
 
 /* ── Site-wide graph: organisation, local business, website, main navigation ── */
-export function siteGraph(services: { title: string; desc: string }[]) {
+export function siteGraph(services: { slug: string; title: string; desc: string }[]) {
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -60,7 +60,7 @@ export function siteGraph(services: { title: string; desc: string }[]) {
           name: "Cleaning services",
           itemListElement: services.map((s) => ({
             "@type": "Offer",
-            itemOffered: { "@type": "Service", name: s.title, description: s.desc, areaServed: "Central Scotland" },
+            itemOffered: { "@type": "Service", name: s.title, description: s.desc, url: abs(`/services/${s.slug}`), areaServed: "Central Scotland" },
           })),
         },
       },
@@ -78,6 +78,8 @@ export function siteGraph(services: { title: string; desc: string }[]) {
         name: "Main navigation",
         itemListElement: [
           { name: "Home", url: "/" },
+          { name: "Cleaning Services", url: "/services" },
+          ...services.map((service) => ({ name: service.title, url: `/services/${service.slug}` })),
           { name: "Get a Free Quote", url: "/contact" },
           { name: "Cleaning Guides", url: "/blog" },
           { name: "Terms & Conditions", url: "/terms-and-condition" },

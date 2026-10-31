@@ -30,8 +30,9 @@ export const SERVICES_HEADER = {
   cta: { label: "Get a Free Quote", href: "/contact" },
 };
 
-export const SERVICES: { title: string; desc: string; image: string; includes: string[]; checklist: { category: string; items: string[] }[] }[] = [
+export const SERVICES: { slug: string; title: string; desc: string; image: string; includes: string[]; checklist: { category: string; items: string[] }[] }[] = [
   {
+    slug: "end-of-tenancy-cleaning",
     title: "End of Tenancy Cleaning",
     desc: "Certified deep cleaning for moving in or out, securing full deposits and meeting agent-approved standards.",
     image: "/services/tenancy.png",
@@ -131,6 +132,7 @@ export const SERVICES: { title: string; desc: string; image: string; includes: s
     ],
   },
   {
+    slug: "deep-spring-cleaning",
     title: "Deep & Spring Cleaning",
     desc: "A full, detailed property refresh to brighten your home, clear clutter and remove built-up dust from neglected spaces.",
     image: "/services/deep.png",
@@ -208,6 +210,7 @@ export const SERVICES: { title: string; desc: string; image: string; includes: s
     ],
   },
   {
+    slug: "after-builders-cleaning",
     title: "After Builders",
     desc: "Removes renovation dust, plaster, paint marks and debris, leaving your home spotless.",
     image: "/services/builders.png",
@@ -275,6 +278,7 @@ export const SERVICES: { title: string; desc: string; image: string; includes: s
     ],
   },
   {
+    slug: "carpet-rug-cleaning",
     title: "Carpet & Rug Cleaning",
     desc: "Hot water extraction for carpets and rugs to revive fibres and remove stains and odours.",
     image: "/services/carpet.png",
@@ -292,6 +296,7 @@ export const SERVICES: { title: string; desc: string; image: string; includes: s
     ],
   },
   {
+    slug: "oven-appliance-cleaning",
     title: "Oven & Appliances",
     desc: "Deep cleaning for ovens, extractors, fridges, freezers, dishwashers and all kitchen appliances.",
     image: "/services/oven.png",
@@ -335,6 +340,7 @@ export const SERVICES: { title: string; desc: string; image: string; includes: s
     ],
   },
   {
+    slug: "pressure-washing",
     title: "Pressure Washing",
     desc: "Jet-wash cleaning for patios, driveways, walls, decking and all exterior hard surfaces.",
     image: "/services/pressure.png",
@@ -514,14 +520,10 @@ export const FOOTER_CONTENT = {
   addressLine2: SITE.addressLine2,
 };
 
-export const FOOTER_SERVICES: { label: string; href: string; serviceIndex?: number }[] = [
-  { label: "End of Tenancy Cleaning", href: "/contact", serviceIndex: 0 },
-  { label: "Deep & Spring Cleaning", href: "/contact", serviceIndex: 1 },
-  { label: "After Builders", href: "/contact", serviceIndex: 2 },
-  { label: "Carpet & Rug Cleaning", href: "/contact", serviceIndex: 3 },
-  { label: "Oven & Appliances", href: "/contact", serviceIndex: 4 },
-  { label: "Pressure Washing", href: "/contact", serviceIndex: 5 },
-];
+export const FOOTER_SERVICES = SERVICES.map((service) => ({
+  label: service.title,
+  href: `/services/${service.slug}`,
+}));
 
 export const FOOTER_QUICK_LINKS: { label: string; href?: string; section?: string }[] = [
   { label: "About Us", section: "about" },

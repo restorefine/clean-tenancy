@@ -4,6 +4,8 @@
 // SVG icons are defined in the page component and merged at render time.
 // ─────────────────────────────────────────────────────────────
 
+import { SITE } from "@/lib/site";
+
 // ── Hero ──────────────────────────────────────────────────────
 export const CONTACT_HERO = {
   eyebrow: "Get In Touch",
@@ -36,9 +38,9 @@ export const CONTACT_INFO: {
   },
   {
     label: "Email Us",
-    value: "hello@cleantenancy.co.uk",
+    value: SITE.email,
     sub: "We reply within a few hours",
-    href: "mailto:hello@cleantenancy.co.uk",
+    href: `mailto:${SITE.email}`,
   },
   {
     label: "Our Office",

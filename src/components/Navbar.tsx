@@ -9,7 +9,6 @@ import { trackEvent } from "@/lib/analytics";
 import { SITE } from "@/lib/site";
 
 const SECTION_LINKS = [
-  { label: "Services", id: "services" },
   { label: "Coverage", id: "coverage" },
   { label: "About", id: "about" },
   { label: "Process", id: "how-it-works" },
@@ -45,6 +44,7 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <ul className="hidden lg:flex items-center gap-7">
+          <li><Link href="/services" className={linkClass}>Services</Link></li>
           {SECTION_LINKS.map(({ label, id }) => (
             <li key={id}>
               <button onClick={() => scrollToSection(id)} className={linkClass}>
@@ -89,6 +89,7 @@ export default function Navbar() {
       {/* Mobile menu */}
       {open && (
         <div className="lg:hidden border-t border-white/10 bg-primary px-4 py-5 flex flex-col gap-4">
+          <Link href="/services" onClick={() => setOpen(false)} className="text-left text-white/85 font-medium hover:text-white transition-colors">Services</Link>
           {SECTION_LINKS.map(({ label, id }) => (
             <button key={id} onClick={() => scrollToSection(id)} className="text-left text-white/85 font-medium hover:text-white transition-colors">
               {label}

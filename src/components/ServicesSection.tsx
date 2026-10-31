@@ -21,10 +21,11 @@ export default function ServicesSection() {
     if (raw === null) return;
     const idx = parseInt(raw, 10);
     if (isNaN(idx) || idx < 0 || idx >= SERVICES.length) return;
-    setActive(idx);
-    requestAnimationFrame(() => {
+    const frame = requestAnimationFrame(() => {
+      setActive(idx);
       document.getElementById("services")?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
+    return () => cancelAnimationFrame(frame);
   }, [searchParams]);
 
   const service = SERVICES[active];
@@ -90,6 +91,10 @@ export default function ServicesSection() {
           <div className="lg:col-span-5 rounded-[2rem] bg-bg-soft p-7 sm:p-9 flex flex-col">
             <h3 className="text-2xl sm:text-3xl font-bold text-primary tracking-tight">{service.title}</h3>
             <p className="mt-3 text-muted leading-relaxed">{service.desc}</p>
+            <Link href={`/services/${service.slug}`} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline">
+              Explore {service.title.toLowerCase()}
+              <ArrowRight className="w-4 h-4" />
+            </Link>
 
             <ul className="mt-7 flex flex-col gap-3.5">
               {service.includes.map((item) => (

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { SITE } from "@/lib/site";
 
 
 const FROM = process.env.EMAIL_FROM!;
@@ -49,7 +50,7 @@ function adminHtml(body: Record<string, unknown>): string {
 
   return `<!DOCTYPE html><html><body style="font-family:sans-serif;color:#1e293b;max-width:600px;margin:0 auto;padding:24px">
   <h2 style="color:#2563eb;margin-bottom:4px">New Cleaning Enquiry</h2>
-  <p style="color:#64748b;margin-top:0">Submitted via cleantenancy.co.uk</p>
+  <p style="color:#64748b;margin-top:0">Submitted via ${new URL(SITE.url).hostname}</p>
 
   <h3 style="border-bottom:2px solid #e2e8f0;padding-bottom:8px">Contact Details</h3>
   <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;width:100%">
@@ -89,7 +90,7 @@ function clientHtml(body: Record<string, unknown>): string {
     ${message ? `<h3 style="margin-top:24px;color:#2563eb">Your Message</h3><p style="background:#f8fafc;border-left:4px solid #2563eb;padding:12px 16px;margin:0;border-radius:0 8px 8px 0">${message}</p>` : ""}
 
     <hr style="border:none;border-top:1px solid #e2e8f0;margin:28px 0" />
-    <p style="color:#64748b;font-size:13px;margin:0">If you have any urgent questions, feel free to call us on <strong>07000 000000</strong> or email <a href="mailto:hello@cleantenancy.co.uk" style="color:#2563eb">hello@cleantenancy.co.uk</a></p>
+    <p style="color:#64748b;font-size:13px;margin:0">If you have any urgent questions, feel free to call us on <strong>07000 000000</strong> or email <a href="mailto:${SITE.email}" style="color:#2563eb">${SITE.email}</a></p>
     <p style="color:#94a3b8;font-size:12px;margin:16px 0 0">Clean Tenancy, Glasgow, Scotland</p>
   </div>
 </body></html>`;

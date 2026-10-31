@@ -6,6 +6,7 @@ import { CheckCircle2, Phone, MapPin, Clock } from "lucide-react";
 import InquiryWizard, { InquiryAnswers } from "@/components/InquiryWizard";
 import { trackEvent } from "@/lib/analytics";
 import { SITE } from "@/lib/site";
+import { FOOTER_SERVICES } from "@/app/data";
 
 const INQUIRY_LABELS: Partial<Record<keyof InquiryAnswers, string>> = {
   serviceType: "Service",
@@ -94,7 +95,7 @@ export default function Contact() {
           <h1 className="text-5xl lg:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight">
             Contact <span className="text-accent">Us</span>
           </h1>
-          <p className="text-slate-500 text-lg leading-relaxed">Tell us about your property and we'll put together the perfect cleaning plan for you.</p>
+          <p className="text-slate-500 text-lg leading-relaxed">Tell us about your property and we&apos;ll put together the perfect cleaning plan for you.</p>
         </div>
       </section>
 
@@ -111,7 +112,7 @@ export default function Contact() {
                   <CheckCircle2 className="w-8 h-8 text-accent" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Request Received</h3>
-                <p className="text-slate-500 leading-relaxed max-w-sm">We'll be in touch shortly to align our services with your requirements.</p>
+                <p className="text-slate-500 leading-relaxed max-w-sm">We&apos;ll be in touch shortly to align our services with your requirements.</p>
                 <button
                   onClick={() => { setSubmitted(false); setInquiry(null); setFormVisible(false); }}
                   className="mt-8 rounded-full border border-slate-200 px-8 py-3 text-sm font-semibold text-slate-600 hover:border-accent hover:text-accent transition-colors"
@@ -261,14 +262,7 @@ export default function Contact() {
             <div className="bg-accent rounded-[1.5rem] p-8 mt-2 h-full">
               <p className="text-white font-bold text-base mb-4">Services We Offer</p>
               <ul className="text-white/90 text-sm space-y-3">
-                {[
-                  { label: "End of Tenancy Cleaning", href: "/?service=0" },
-                  { label: "Deep & Spring Cleaning",  href: "/?service=1" },
-                  { label: "After Builders Cleaning", href: "/?service=2" },
-                  { label: "Carpet & Rug Cleaning",   href: "/?service=3" },
-                  { label: "Oven & Appliances",       href: "/?service=4" },
-                  { label: "Pressure Washing",        href: "/?service=5" },
-                ].map(({ label, href }) => (
+                {FOOTER_SERVICES.map(({ label, href }) => (
                   <li key={label} className="flex items-center gap-2.5">
                     <div className="w-1.5 h-1.5 rounded-full bg-white shrink-0" />
                     <Link href={href} className="hover:text-white transition-colors underline-offset-2 hover:underline">

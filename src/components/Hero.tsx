@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import { useEffect, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { HERO_CONTENT, STATS, TESTIMONIALS } from "@/app/data";
 import { trackEvent } from "@/lib/analytics";
@@ -9,8 +9,23 @@ import { trackEvent } from "@/lib/analytics";
 /* Avatar tints alternate between the brand colours */
 const AVATAR_TINTS = ["bg-accent text-white", "bg-lime text-primary", "bg-sky text-primary"];
 
-/** Full-bleed photo hero with copy anchored bottom left. */
+/** Silent background video with copy anchored bottom left. */
 export default function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePlayback = () => {
+      if (preference.matches) video.pause();
+      else void video.play().catch(() => {});
+    };
+    updatePlayback();
+    preference.addEventListener("change", updatePlayback);
+    return () => preference.removeEventListener("change", updatePlayback);
+  }, []);
+
   return (
     <section className="relative">
       <style>{`
@@ -24,12 +39,21 @@ export default function Hero() {
       `}</style>
 
       <div>
-        <div className="relative overflow-hidden h-[calc(100svh-72px)] min-h-[600px] flex">
-          <Image src="/images/hero.png" alt="A freshly cleaned, bright open-plan living room" fill priority sizes="100vw" quality={80} className="object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/90 via-primary-dark/45 to-primary-dark/5" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary-dark/60 via-transparent to-transparent" />
+        <div className="relative overflow-hidden min-h-[620px] sm:min-h-[680px] lg:h-[calc(100svh-72px)] lg:min-h-[600px] flex bg-primary-dark">
+          <video
+            ref={videoRef}
+            src="/videos/hero.mp4"
+            poster="/images/hero.png"
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
+            tabIndex={-1}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
 
-          <div className="relative mt-auto w-full mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8 pt-10 pb-12 lg:pb-16 flex flex-col lg:flex-row lg:items-end justify-between gap-10">
+          <div className="relative mt-auto w-full mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8 pt-24 pb-10 lg:pb-16 flex flex-col lg:flex-row lg:items-end justify-between gap-7 lg:gap-10">
             {/* Copy */}
             <div className="hp-copy max-w-xl">
               <h1 className="text-[2.4rem] leading-[0.98] sm:text-5xl lg:text-[3.6rem] font-semibold tracking-[-0.025em] text-white">
@@ -40,7 +64,7 @@ export default function Hero() {
                 <Link
                   href={HERO_CONTENT.ctaPrimary.href}
                   className="group inline-flex items-center gap-3 rounded-full bg-lime pl-7 pr-2 py-2 text-sm font-semibold text-primary transition-colors hover:bg-lime-dark active:scale-[0.98]"
-                  onClick={() => trackEvent("quote_click", { link_location: "hero_photo", label: HERO_CONTENT.ctaPrimary.label })}
+                  onClick={() => trackEvent("quote_click", { link_location: "hero_video", label: HERO_CONTENT.ctaPrimary.label })}
                 >
                   {HERO_CONTENT.ctaPrimary.label}
                   <span className="w-9 h-9 rounded-full bg-primary text-lime flex items-center justify-center transition-transform group-hover:translate-x-0.5">
@@ -54,10 +78,10 @@ export default function Hero() {
             </div>
 
             {/* Social proof */}
-            <div className="hp-proof flex items-center gap-4 lg:max-w-xs lg:mr-16">
+            <div className="hp-proof flex items-start gap-3 sm:items-center sm:gap-4 lg:max-w-xs lg:mr-16">
               <div className="flex -space-x-3 shrink-0">
                 {TESTIMONIALS.slice(0, 3).map((t, i) => (
-                  <span key={t.name} className={`w-11 h-11 rounded-full ring-2 ring-primary-dark flex items-center justify-center text-xs font-semibold ${AVATAR_TINTS[i]}`}>
+                  <span key={t.name} className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full ring-2 ring-primary-dark flex items-center justify-center text-xs font-semibold ${AVATAR_TINTS[i]}`}>
                     {t.initials}
                   </span>
                 ))}
