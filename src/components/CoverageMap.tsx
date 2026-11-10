@@ -91,11 +91,11 @@ export default function CoverageMap() {
 
       // HQ hub markers (larger)
       L.circleMarker([GLASGOW_HQ.lat, GLASGOW_HQ.lng], hqStyle("#2c66b0"))
-        .bindPopup("<strong>Glasgow Hub</strong><br/><span style='font-size:11px'>Primary Operations Centre</span>")
+        .bindPopup("<strong>Glasgow Hub</strong><br/><span style='font-size:11px'>Western Region Centre</span>")
         .addTo(map);
 
       L.circleMarker([EDINBURGH_HQ.lat, EDINBURGH_HQ.lng], hqStyle("#3f8a24"))
-        .bindPopup("<strong>Edinburgh Hub</strong><br/><span style='font-size:11px'>Eastern Region Centre</span>")
+        .bindPopup("<strong>Edinburgh Hub</strong><br/><span style='font-size:11px'>Primary Operations Centre</span>")
         .addTo(map);
     });
 

@@ -64,8 +64,8 @@ export default function CoverageSection() {
   };
 
   const hubs = [
-    { name: "Glasgow hub", areas: glasgowAreas, dot: "bg-accent", chip: "bg-accent/8 text-accent" },
     { name: "Edinburgh hub", areas: edinburghAreas, dot: "bg-leaf", chip: "bg-leaf/10 text-leaf" },
+    { name: "Glasgow hub", areas: glasgowAreas, dot: "bg-accent", chip: "bg-accent/8 text-accent" },
   ];
 
   return (
@@ -88,7 +88,7 @@ export default function CoverageSection() {
                 <input
                   id="postcode-check"
                   type="text"
-                  placeholder="e.g. G12 8QQ"
+                  placeholder="e.g. EH3 5AB"
                   className="flex-1 min-w-0 bg-transparent outline-none px-4 py-2.5 text-primary placeholder-slate-500 font-medium"
                   value={searchQuery}
                   onChange={(e) => handleChange(e.target.value)}
@@ -128,7 +128,7 @@ export default function CoverageSection() {
                     <>
                       <MapPin className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
                       <p className="text-sm text-amber-900 leading-relaxed">
-                        <span className="font-semibold">That doesn&apos;t look like a UK postcode.</span> Try G12 8QQ, EH3 5AB or just FK7.
+                        <span className="font-semibold">That doesn&apos;t look like a UK postcode.</span> Try EH3 5AB, G12 8QQ or just FK7.
                       </p>
                     </>
                   )}
